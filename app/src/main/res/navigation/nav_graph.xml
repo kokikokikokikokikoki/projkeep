@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.projectkeep.fragments.HomeFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_homeFragment_to_addExpenseFragment"
+            app:destination="@id/addExpense"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_HomeFragment_to_addExpense"
+            app:destination="@id/addExpense" />
+    </fragment>
+    <fragment
+        android:id="@+id/addExpense"
+        android:name="com.example.projectkeep.view.AddTransactionFragment"
+        android:label="fragment_add_transaction"
+        tools:layout="@layout/add_transaction">
+        <action
+            android:id="@+id/action_addExpense_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionDetailsFragment"
+        android:name="com.example.projectkeep.fragments.TransactionDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_transaction_detail">
+        <argument
+            android:name="transaction"
+            app:argType="com.example.projectkeep.model.Transaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTransactionFragment"
+        android:name="com.example.projectkeep.fragments.EditTransactionFragment"
+        android:label="Edit Transaction"
+        tools:layout="@layout/fragment_edit_transaction">
+        <argument
+            android:name="transaction"
+            app:argType="com.example.projectkeep.model.Transaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.projectkeep.fragments.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
+    <dialog
+        android:id="@+id/errorDialog"
+        android:name="com.example.projectkeep.view.ErrorDialog"
+        android:label="ErrorDialog"
+        tools:layout="@layout/error_dialog_layout">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.example.projectkeep.view.SignInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="com.example.projectkeep.view.SignUpActivity"
+        android:label="activity_sign_up"
+        tools:layout="@layout/activity_sign_up" />
+</navigation>

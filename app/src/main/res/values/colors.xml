@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF808080</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="lightblue">#FFADD8E6</color>
+    <color name="pink">#FFFFC0CB</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="bubblegum">#FD5DA8</color>
+    <color name="darkpink">#E11584</color>
+    <color name="background">#f9f9f9</color>
+    <color name="green">#6FCF97</color>
+    <color name="firstblue">#7FBCD2</color>
+    <color name="secondblue">#A5F1E9</color>
+    <color name="thirdblue">#E1FFEE</color>
+    <color name="fourthblue">#FFEEAF</color>
+    <color name="orange">#E14D2A</color>
+    <color name="expense">#E0144C</color>
+//color background
+
+    <color name="button">#3F51B5</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="bottomNav">#FFFFFF</color>
+
+    <color name="background_deep">#EFEFEF</color>
+    <color name="textSecondary">#575A6C</color>
+    <color name="textPrimary">#44475B</color>
+
+    <color name="transparent">#0000FFFF</color>
+    <color name="splashBackground">#232C3D</color>
+</resources>

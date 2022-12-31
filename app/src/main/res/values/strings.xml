@@ -1,0 +1,138 @@
+<resources>
+    <string name="app_name">ProjectKeep</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_save_transaction">Save Transaction</string>
+    <string name="text_ui_mode">UI Mode</string>
+    <string name="text_total_income">Total Income</string>
+    <string name="text_total_expense">Total Expense</string>
+    <string name="text_total_balance">Total Balance</string>
+    <string name="text_recent_transactions">Recent Transactions</string>
+    <string name="text_view_all">View all</string>
+    <string name="text_expense_when">When</string>
+    <string name="text_expense_amount">Amount</string>
+    <string name="text_expense_transaction_type">Transaction type</string>
+    <string name="text_expense_tag">Tag</string>
+    <string name="text_expense_note">Note</string>
+    <string name="text_expense_add_transaction">Save Transaction</string>
+    <string name="text_expense_baht">THB</string>
+    <string name="success_expense_saved">Transaction saved successfully</string>
+    <string name="success_transaction_delete">Transaction deleted successfully!</string>
+    <string name="text_title">Title</string>
+    <string name="text_about">About</string>
+    <string name="text_filter">Filter</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_createdAt">Created At</string>
+    <string-array name="transaction_type">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+    <string-array name="transaction_tag">
+        <item>Food</item>
+        <item>Transportation</item>
+        <item>Entertainment</item>
+        <item>Shopping</item>
+        <item>Health</item>
+        <item>Education</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--  Share -->
+    <string name="success_transaction_export">Transaction exported successfully!</string>
+    <string name="failed_transaction_export">Transaction exported failed ☹️</string>
+    <string name="text_error">Transaction exported failed ☹️</string>
+    <string name="support_pending">Support for export on Android10+ is still in progress, kindly be patient and thanks for support!</string>
+    <string name="text_open">Open</string>
+
+    <!-- share transaction -->
+    <string name="share_message">\%s \nAmount: %s, \nTransaction-Type: %s, \nTag: %s, \nDate: %s, \nNote: %s, \nCreatedAt: %s \n\nVisit: https://github.com/Spikeysanju/Expenso</string>
+    <string name="text_transaction_empty_title">No Transaction Yet!</string>
+    <string name="text_transaction_empty_desc">After your first transaction you will be able to view it here</string>
+    <string name="text_export_csv">Export to CSV</string>
+    <string name="text_add_transaction">Add Transaction</string>
+    <string name="text_undo">Undo</string>
+    <string name="text_error_occurred">Error occurred!</string>
+
+    <!-- array transaction -->
+    <string name="bills">Bills</string>
+    <string name="food">Food </string>
+    <string name="education">Education</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="housing">Housing</string>
+    <string name="health">Health</string>
+    <string name="travel">Travel</string>
+    <string name="transportation">Transportation</string>
+    <string name="shopping">Shopping</string>
+    <string name="other">Other</string>
+    <string name="salary">Salary</string>
+    <string name="investments">Investments</string>
+    <string name="save">save</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="spending_warning">Attention! You almost reached your spending limit!</string>
+    <string name="warning">warning</string>
+    <string name="total_expense">EXPENSES</string>
+    <string name="spending_progress">Spending progress</string>
+    <string name="goal_progress">Goal Progress</string>
+    <string name="limit_not_set">limit not set</string>
+    <string name="add_new_transaction">add new transaction</string>
+    <string name="all_transactions">All Transactions</string>
+    <string name="ten_days">10 days</string>
+    <string name="thirty_days">30 days</string>
+    <string name="sixty_days">60 days</string>
+    <string name="ninety_days">90 days</string>
+    <string name="six_months">6 months</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="expenses">Expenses</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="missing_category">Please select a category</string>
+    <string name="missing_field">Please enter field</string>
+    <string name="required_field">field required</string>
+    <string name="missing_transaction_type">Please select transaction type</string>
+    <string name="invalid_date">Please enter a valid date</string>
+    <string name="transaction_saved">Transaction saved successfully</string>
+    <string name="total_income">INCOME</string>
+    <string name="undo">Undo</string>
+    <string name="transaction_deleted">Transaction deleted successfully</string>
+    //new
+    <string name="your_transactions">Your Transactions</string>
+    <string name="monthly_budget">Monthly Budget</string>
+    <string name="my_expenses">My Expenses</string>
+    <string name="add_your_transaction_for_this_month">Add Your Transaction for this Month</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="drawericon">drawerIcon</string>
+    <string name="name">Name :</string>
+    <string name="edit">edit</string>
+    <string name="settings">Settings</string>
+    <string name="darkmode">DarkMode</string>
+    <string name="icon">Icon</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="back">Back</string>
+    <string name="category">Category</string>
+
+    <string name="transport">Transport</string>
+    <string name="title">Title</string>
+    <string name="details">Detail</string>
+    <string name="amount">Amount</string>
+    <string name="date">Date</string>
+    <string name="type">Type</string>
+    <string name="note">Note</string>
+    <string name="medical">Medical</string>
+    <string name="totalbalance">Total Balance</string>
+    <string name="btnok"> Ok</string>
+    <string name="input_name">Title</string>
+    <string name="input_description">description</string>
+    <string name="add_goal">Add goal</string>
+    <string name="new_goal">New Goal</string>
+    <string name="goal_price">Goal Value</string>
+    <string name="new_income">New Income</string>
+    <string name="stocks">Stocks</string>
+    <string name="pocket_money">Pocket Money</string>
+    <string name="savings">savings</string>
+    <string name="add_income">Add Income</string>
+    <string name="calculation_goal">Estimated Months</string>
+
+</resources>
