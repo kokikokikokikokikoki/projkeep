@@ -128,6 +128,8 @@ class AddIncomeFragment : Fragment(),View.OnClickListener {
 
     private fun setCategory(v: View, button: MaterialButton) {
         category = button.text.toString()
+        //print out category when selected
+        Log.d("category", category)
         button.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_text_btn_bg_color_selector))
         button.setIconTintResource(R.color.purple_200)
         button.setStrokeColorResource(R.color.purple_200)

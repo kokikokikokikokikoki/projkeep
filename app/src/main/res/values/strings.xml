@@ -112,7 +112,7 @@
     <string name="new_transaction">New Transaction</string>
     <string name="back">Back</string>
     <string name="category">Category</string>
-
+    <string name="all">All</string>
     <string name="transport">Transport</string>
     <string name="title">Title</string>
     <string name="details">Detail</string>
@@ -134,5 +134,26 @@
     <string name="savings">savings</string>
     <string name="add_income">Add Income</string>
     <string name="calculation_goal">Estimated Months</string>
+
+    //month
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+
+
+    <string name="your_expenses">Your Expenses</string>
+    <string name="your_income">Your Income</string>
+
 
 </resources>

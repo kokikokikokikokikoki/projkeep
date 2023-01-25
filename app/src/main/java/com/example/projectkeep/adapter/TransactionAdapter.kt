@@ -113,12 +113,7 @@ if(transaction.transactionType == "Income"){
 
 
         public class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        fun bind() {
-//            itemView.setOnClickListener {
-//                val intent = Intent(itemView.context, TransactionDetailsActivity::class.java)
-//                itemView.context.startActivity(intent)
-//            }
-//        }
+
 
         val categoryType : TextView = itemView.findViewById(R.id.tv_transaction_title)
         val date : TextView = itemView.findViewById(R.id.tv_transaction_description)

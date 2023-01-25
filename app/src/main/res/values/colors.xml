@@ -35,4 +35,24 @@
 
     <color name="transparent">#0000FFFF</color>
     <color name="splashBackground">#232C3D</color>
+
+    // color for piechart
+    <color name="color_income">#ADA2FF </color>
+    <color name="color_savings">#C0DEFF</color>
+    <color name="color_stocks">#FFE5F1</color>
+    <color name="color_other">#FFF8E1</color>
+
+    // color for piechart expense
+    <color name="color_Food">#82AAE3 </color>
+    <color name="color_shopping">#91D8E4</color>
+    <color name="color_transport">#BFEAF5</color>
+    <color name="color_medical">#EAFDFC</color>
+    <color name="color_education">#FFF6BD</color>
+    <color name="color_others">#CEEDC7</color>
+
+//firstblue light
+    <color name="firstblue_light">#ADD8E6</color>
+    <color name="purple">#AFB4FF</color>
+
+    <color name="gradientpurple">#B9E0FF</color>
 </resources>

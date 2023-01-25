@@ -1,10 +1,8 @@
 package com.example.projectkeep.fragments
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.CalendarContract.EventDays
 import android.util.Log
 import android.view.*
 import android.view.animation.Animation
@@ -12,41 +10,22 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectkeep.R
 import com.example.projectkeep.adapter.TransactionAdapter
-import com.example.projectkeep.adapter.TransactionItemAdapter
 import com.example.projectkeep.databinding.FragmentDashboardBinding
 
-import com.example.projectkeep.model.TransactionModel
 import com.example.projectkeep.model.Transactions
-import com.example.projectkeep.view.show
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.database.*
-import com.google.firebase.database.Query
-import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_sign_in.view.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-import kotlinx.android.synthetic.main.total_balance.view.*
-import kotlinx.android.synthetic.main.transaction_period_filter_layout.*
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
-import java.sql.Timestamp
 import java.text.NumberFormat
-import java.time.LocalDate
-import java.time.LocalDateTime.ofInstant
-import java.time.LocalTime.ofInstant
-import java.time.ZoneId
-import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -81,6 +81,7 @@
                 style="@style/selector_button"
                 app:iconGravity="textTop"
                 app:icon="@drawable/car"
+                android:text="Car"
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
@@ -97,7 +98,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-
+                android:text="Electronics"
                 tools:ignore="SmallSp" />
 
             <com.google.android.material.button.MaterialButton
@@ -110,7 +111,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-
+                android:text="Savings"
                 tools:ignore="SmallSp" />
 
 
@@ -124,7 +125,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-
+                android:text="Medical"
                 tools:ignore="SmallSp" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/house"
@@ -136,7 +137,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-
+                android:text="@string/housing"
                 tools:ignore="SmallSp"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/others"
@@ -148,7 +149,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-
+                android:text="Others"
                 tools:ignore="SmallSp" />
 
 
@@ -226,7 +227,7 @@
             app:boxCornerRadiusBottomEnd="8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/total_goal"
+                android:id="@+id/monthly_budget"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="phone"/>

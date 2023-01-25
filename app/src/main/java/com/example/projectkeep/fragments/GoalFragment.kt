@@ -5,56 +5,84 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.projectkeep.R
+import com.example.projectkeep.adapter.GoalAdapter
+import com.example.projectkeep.databinding.GoalDashboardBinding
+import com.example.projectkeep.databinding.GoalFragmentBinding
+import com.example.projectkeep.model.GoalModel
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.layout_goal_card.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GoalFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class GoalFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class GoalFragment : Fragment(R.layout.goal_dashboard) {
+   //bindings
+    private lateinit var binding: GoalDashboardBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var goalAdapter: GoalAdapter
+    private lateinit var GoalList: ArrayList<GoalModel>
+    private var db = Firebase.firestore
+    val database = FirebaseDatabase.getInstance()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+private fun getGoalData() {
+        db.collection("Goals").get().addOnSuccessListener { result ->
+            for (document in result) {
+                val goal = document.toObject(GoalModel::class.java)
+
+                val progress = (goal.initialAmount!!.toFloat() / goal.goalAmount!!.toFloat()) * 100
+                goal.progress = progress.toLong()
+
+                GoalList.add(goal)
+
+
+
+
+
+            }
+            goalAdapter.notifyDataSetChanged()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_goal, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GoalFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GoalFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = GoalDashboardBinding.bind(view)
+
+        recyclerView = binding.recyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        GoalList = arrayListOf()
+        goalAdapter = GoalAdapter(GoalList)
+
+
+        recyclerView.adapter = goalAdapter
+        getGoalData()
+
+
+
+        // when click on add button, navigate to add goal fragment
+        binding.addGoal.setOnClickListener(){
+            val addGoalBtn = AddGoalFragment()
+    val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame_layout, AddGoalFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+
+            Toast.makeText(context, "Add goal", Toast.LENGTH_SHORT).show()
+
+        }
+
     }
+
+
 }

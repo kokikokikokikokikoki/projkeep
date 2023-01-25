@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+       
         android:padding="12dp">
 
         <ImageView
@@ -35,9 +36,13 @@
             android:fontFamily="@font/arialbd"
             android:textSize="18sp"
             android:textColor="@color/black"
+
             app:layout_constraintStart_toEndOf="@id/iv_transaction_icon"
             app:layout_constraintTop_toTopOf="@id/iv_transaction_icon"
-            tools:text="Transaction" />
+            tools:text="Transaction"/>
+
+
+
 
         <TextView
             android:id="@+id/tv_transaction_description"
@@ -47,6 +52,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/arialbd"
             android:textSize="12sp"
+
             app:layout_constraintBottom_toBottomOf="@+id/iv_transaction_icon"
             app:layout_constraintStart_toEndOf="@id/iv_transaction_icon"
             app:layout_constraintTop_toBottomOf="@id/tv_transaction_title"

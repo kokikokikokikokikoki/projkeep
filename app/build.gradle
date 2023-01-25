@@ -101,4 +101,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     // material tap
     implementation 'uk.co.samuelwall:material-tap-target-prompt:3.3.2'
+
+
+    // new piechart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
 }
