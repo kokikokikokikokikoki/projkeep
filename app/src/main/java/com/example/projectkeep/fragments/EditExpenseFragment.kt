@@ -1,48 +1,34 @@
 package com.example.projectkeep.fragments
 
-import android.content.Intent
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil.bind
+import androidx.databinding.adapters.ViewGroupBindingAdapter.setListener
 import com.example.projectkeep.R
-import com.example.projectkeep.adapter.TransactionAdapter
-import com.example.projectkeep.databinding.ActivityMainBinding.bind
-import com.example.projectkeep.databinding.AddIncomeBinding
 import com.example.projectkeep.databinding.AddTransactionBinding
-import com.example.projectkeep.databinding.FragmentAddExpenseBinding
-import com.example.projectkeep.databinding.FragmentAddTransactionLayoutBinding
+import com.example.projectkeep.databinding.EditGoalBinding
 import com.example.projectkeep.model.Transactions
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.add_transaction.*
-import kotlinx.android.synthetic.main.transaction_item.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.Unit.toString
 
 
-class AddExpense : Fragment(), View.OnClickListener {
-
-    lateinit var auth: FirebaseAuth
-    lateinit var db: FirebaseFirestore
-
-    // TODO: Rename and change types of parameters
+class EditExpenseFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: AddTransactionBinding
     private lateinit var backBtn: ImageView
 
+    val database = FirebaseFirestore.getInstance()
     private lateinit var titleBtn: EditText
     private lateinit var amountBtn: EditText
     private lateinit var saveBtn: Button
@@ -56,12 +42,8 @@ class AddExpense : Fragment(), View.OnClickListener {
     private lateinit var categoryOther: Button
 
 
-    val database = FirebaseFirestore.getInstance()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -73,30 +55,19 @@ class AddExpense : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.add_transaction, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = AddTransactionBinding.bind(view)
-        //backBtn = go back to previous fragment(home fragment)
         backBtn = binding.back
         datePicker = binding.editDate
         titleBtn = binding.editTitle
         amountBtn = binding.editMoney
         saveBtn = binding.addTransaction
 
-//        val bundle = this.arguments
-//        val transactionId = bundle?.getString("transactionId")
+        val bundle = this.arguments
 
-        saveBtn.setOnClickListener {
-
-            if (validateFields()) {
-
-                saveTransaction()
-            }
-        }
-
-        setListener(binding)
-
+        //buttons
         categoryFood = binding.food
         categoryShopping = binding.shopping
         categoryTransport = binding.transport
@@ -105,24 +76,19 @@ class AddExpense : Fragment(), View.OnClickListener {
         categoryOther = binding.others
 
 
+        retrieveExpenseData()
+
         backBtn.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        setDate()
+        setListener(binding)
 
 
-    }
+        saveBtn.setOnClickListener {
+            updateExpenseData()
+        }
 
-    private fun setDate() {
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-        datePicker.setText("" + day + "/" + (month + 1) + "/" + year)
-
-        datePicker.isEnabled = false
 
     }
 
@@ -146,18 +112,24 @@ class AddExpense : Fragment(), View.OnClickListener {
             }
             binding.shopping -> {
                 setCategory(v, binding.shopping)
+                category = "Shopping"
             }
             binding.transport -> {
                 setCategory(v, binding.transport)
+                category = "Transport"
             }
             binding.health -> {
                 setCategory(v, binding.health)
+                category = "Medical"
+
             }
             binding.others -> {
                 setCategory(v, binding.others)
+                category = "Other"
             }
             binding.academics -> {
                 setCategory(v, binding.academics)
+                category = "Education"
             }
         }
     }
@@ -226,42 +198,125 @@ class AddExpense : Fragment(), View.OnClickListener {
         button.setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondary))
     }
 
-    private fun saveTransaction() {
+    private fun retrieveExpenseData() {
+
+        val expenseId = arguments?.getString("id")
+        val transRef = expenseId?.let { database.collection("Transaction").document(it) }
+//log the expense id
+        Log.d("ExpenseId", expenseId.toString())
+        //disable title field
+        titleBtn.isEnabled = false
+        titleBtn.isClickable = false
+
+        categoryFood.isClickable = false
+        categoryShopping.isClickable = false
+        categoryTransport.isClickable = false
+        categoryEducation.isClickable = false
+        categoryMedical.isClickable = false
+        categoryOther.isClickable = false
+
+        // click date and can choose the date
+        datePicker.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            //cannot choose date in the future
+            val dpd = DatePickerDialog(
+                requireContext(),
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    // Display Selected date in textbox
+                    datePicker.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
+                },
+                year,
+                month,
+                day
+            )
+            dpd.show()
+            dpd.datePicker.maxDate = System.currentTimeMillis()
+        }
+
+
+        if (transRef != null) {
+            transRef.get().addOnSuccessListener { document ->
+                if (document != null) {
+                    val timestamp = document.getTimestamp("date")
+                    if (timestamp != null) {
+                        val formatter = SimpleDateFormat("dd/MM/yyyy")
+                        val date = timestamp.toDate()
+                        val dateString = formatter.format(date)
+                        datePicker.setText(dateString)
+
+                    }
+                    val transaction = document.toObject(Transactions::class.java)
+
+                    if (transaction != null) {
+                        titleBtn.setText(transaction.title)
+                        amountBtn.setText(transaction.amount.toString())
+                        category = transaction.categoryType.toString()
+                        when (category) {
+                            "Food" -> {
+                                setCategory(binding.food, binding.food)
+                            }
+                            "Shopping" -> {
+                                setCategory(binding.shopping, binding.shopping)
+                            }
+                            "Transport" -> {
+                                setCategory(binding.transport, binding.transport)
+                            }
+                            "Medical" -> {
+                                setCategory(binding.health, binding.health)
+                            }
+                            "Other" -> {
+                                setCategory(binding.others, binding.others)
+                            }
+                            "Education" -> {
+                                setCategory(binding.academics, binding.academics)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+                // log if the document is not found
+                .addOnFailureListener { exception ->
+                    Log.d("errormsg", "get failed with ", exception)
+                }
+        }
+    }
+
+
+    private fun updateExpenseData() {
+        val expenseId = arguments?.getString("id")
+        val transRef = expenseId?.let { database.collection("Transaction").document(it) }
+
         val date = datePicker.text.toString()
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val parsedDate = formatter.parse(date)
         val timestamp = Timestamp(parsedDate)
 
-        val currentDocument = database.collection("Transaction").document()
-        val expenses = hashMapOf(
-            "title" to titleBtn.text.toString(),
-            "amount" to amountBtn.text.toString().toDouble().toLong(),
-            "categoryType" to category,
-            "date" to timestamp,
-            "transactionType" to "Expense",
-            "id" to currentDocument.id
+        val title = titleBtn.text.toString()
+        val amount = amountBtn.text.toString().toDouble()
+        val categoryType = category
 
+        transRef?.update(
+
+            "date", timestamp,
+            "title", title,
+            "amount", amount.toLong(),
+            "categoryType", categoryType
         )
-        currentDocument.set(expenses)
-       // database.collection("Transaction").add(expenses)
 
+            ?.addOnSuccessListener {
+                Log.d("TAG", "DocumentSnapshot successfully updated!")
+                // Navigate back to the expense list or wherever you want to go after the update is done.
+                activity?.onBackPressed()
+            }
+            ?.addOnFailureListener { e ->
+                Log.w("TAG", "Error updating document", e)
+            }
 
-// go back to home fragment after saving
-        activity?.onBackPressed()
-
-
-    }
-
-    // if the fields are not filled, show a toast message
-    private fun validateFields(): Boolean {
-        if (TextUtils.isEmpty(titleBtn.text)) {
-            Toast.makeText(context, "Please enter a title", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (TextUtils.isEmpty(amountBtn.text)) {
-            Toast.makeText(context, "Please enter an amount", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        return true
     }
 
 

@@ -22,7 +22,7 @@
             android:layout_height="60dp"
             android:background="@drawable/icon_background_shape"
             android:padding="10dp"
-            android:src="@drawable/ic_other"
+            android:src="@drawable/ic_goal"
             app:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

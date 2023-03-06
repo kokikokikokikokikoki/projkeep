@@ -23,6 +23,8 @@
     <color name="fourthblue">#FFEEAF</color>
     <color name="orange">#E14D2A</color>
     <color name="expense">#E0144C</color>
+    <color name="newred">#EB5757</color>
+
 //color background
 
     <color name="button">#3F51B5</color>
@@ -43,11 +45,11 @@
     <color name="color_other">#FFF8E1</color>
 
     // color for piechart expense
-    <color name="color_Food">#82AAE3 </color>
-    <color name="color_shopping">#91D8E4</color>
+    <color name="color_Food">#6FCF97 </color>
+    <color name="color_shopping">#3F51B5</color>
     <color name="color_transport">#BFEAF5</color>
-    <color name="color_medical">#EAFDFC</color>
-    <color name="color_education">#FFF6BD</color>
+    <color name="color_medical">#FD5DA8</color>
+    <color name="color_education">#E14D2A</color>
     <color name="color_others">#CEEDC7</color>
 
 //firstblue light

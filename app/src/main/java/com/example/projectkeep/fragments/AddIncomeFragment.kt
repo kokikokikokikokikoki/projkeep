@@ -46,6 +46,9 @@ class AddIncomeFragment : Fragment(),View.OnClickListener {
 
     val database = FirebaseFirestore.getInstance()
 
+    val bundle = this.arguments
+    val transactionId = bundle?.getString("transactionId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -94,6 +97,7 @@ class AddIncomeFragment : Fragment(),View.OnClickListener {
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         datePicker.setText("" + day + "/" + (month + 1) + "/" + year)
+        datePicker.isEnabled = false
     }
     private fun setListener(binding: AddIncomeBinding) {
         binding.income.setOnClickListener(this)
@@ -177,21 +181,18 @@ class AddIncomeFragment : Fragment(),View.OnClickListener {
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val parsedDate = formatter.parse(date)
         val timestamp = Timestamp(parsedDate)
-
+        val currentDocument = database.collection("Transaction").document()
         val income = hashMapOf(
             "title" to titleBtn.text.toString(),
             "amount" to amountBtn.text.toString().toDouble().toLong(),
             "categoryType" to category,
             "date" to timestamp,
-            "transactionType" to "Income"
+            "transactionType" to "Income",
+            "id" to currentDocument.id
         )
-        database.collection("Transaction").add(income)
-            .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w("TAG", "Error adding document", e)
-            }
+        currentDocument.set(income)
+        //database.collection("Transaction").add(income)
+
 
 // go back to home fragment after saving
         activity?.onBackPressed()

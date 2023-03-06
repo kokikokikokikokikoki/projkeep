@@ -14,6 +14,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.projectkeep.adapter.ViewPagerAdapter
 import com.example.projectkeep.databinding.ActivityMainBinding
 import com.example.projectkeep.fragments.*
+import com.example.projectkeep.utilities.scheduleNotification
+import com.example.projectkeep.utilities.NotificationReminder
 
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -22,6 +24,13 @@ import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import android.app.PendingIntent
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import com.example.projectkeep.utilities.utils
+import com.example.projectkeep.utilities.utils.Companion.scheduleNotification
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,6 +61,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(HomeFragment())
+
+       // activate the notification function
+
+        utils.scheduleNotification(this)
 
 
 

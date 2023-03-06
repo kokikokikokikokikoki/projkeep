@@ -154,6 +154,15 @@
 
     <string name="your_expenses">Your Expenses</string>
     <string name="your_income">Your Income</string>
+    <string name="RemainingAmount">Remaining Amount</string>
+    <string name="remain_month">Months Remaining</string>
+    <string name="Monthly_Income">Monthy Income</string>
+    <string name="income_total">Total Income</string>
+    <string name="monthly_expense">Monthly Expenses</string>
+    <string name="expenses_total">Total Expenses</string>
+    <string name="gifts">Gifts</string>
+    <string name="Monthly_expenses">Monthly Expenses</string>
+    <string name="addexpense">Add Expense</string>
 
 
 </resources>

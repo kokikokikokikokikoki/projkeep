@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.button.MaterialButton
@@ -134,6 +135,11 @@ class ReportFragment : Fragment(R.layout.fragment_report), View.OnClickListener 
 
                 data.setValueFormatter(percentFormatter)
                 data.setValueTextSize(12f)
+                data.setValueFormatter(object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        return if (value < 5f) "" else "${"%d".format(value.toInt())}%"
+                    }
+                })
                 pieChart.data = data
                 pieChart.invalidate()
 
@@ -151,52 +157,7 @@ class ReportFragment : Fragment(R.layout.fragment_report), View.OnClickListener 
     }
 
 
-    //private fun updatePieChart() {
-//    val categoryAmounts = mutableMapOf<String, Float>()
-//
-//    db.collection("Transaction").whereEqualTo("transactionType", "Income")
-//        .get()
-//        .addOnSuccessListener { result ->
-//            for (document in result) {
-//                val categoryType = document.get("categoryType").toString()
-//                val amount = document.get("amount").toString().toFloat()
-//                if (categoryAmounts.containsKey(categoryType)) {
-//                    categoryAmounts[categoryType] = categoryAmounts[categoryType]!! + amount
-//                } else {
-//                    categoryAmounts[categoryType] = amount
-//                }
-//            }
-//            val entries = mutableListOf<PieEntry>()
-//            for ((category, amount) in categoryAmounts) {
-//                entries.add(PieEntry(amount, category))
-//            }
-//            val dataSet = PieDataSet(entries, "")
-//            addColorsToDataSet(dataSet)
-//            val data = PieData(dataSet)
-//
-//
-//            dataSet.sliceSpace = 1f
-//            // turn into percent
-//           val percentFormatter = PercentFormatter(pieChart)
-//
-//            data.setValueFormatter(percentFormatter)
-//            data.setValueTextSize(12f)
-//            pieChart.data = data
-//            pieChart.invalidate()
-//
-//            pieChart.setUsePercentValues(true)
-//
-//
-//
-////            pieChart.data = data
-////            pieChart.invalidate()
-//            pieChart.setCenterText("Income")
-//        }
-//        .addOnFailureListener { exception ->
-//            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-//        }
-//
-//}
+
     override fun onClick(v: View?) {
         when (v) {
             binding.January -> {
@@ -742,6 +703,9 @@ class ReportFragment : Fragment(R.layout.fragment_report), View.OnClickListener 
                         transactionList.add(transaction!!)
                     }
                 }
+                else {
+                    transactionList.clear()
+                }
 
 
                 transactionAdapter.notifyDataSetChanged()
@@ -776,55 +740,7 @@ class ReportFragment : Fragment(R.layout.fragment_report), View.OnClickListener 
 
 }
 
-//
-//<?xml version="1.0" encoding="utf-8"?>
-//<androidx.coordinatorlayout.widget.CoordinatorLayout
-//xmlns:android="http://schemas.android.com/apk/res/android"
-//xmlns:app="http://schemas.android.com/apk/res-auto"
-//
-//xmlns:tools="http://schemas.android.com/tools"
-//android:layout_width="match_parent"
-//android:layout_height="match_parent">
-//<TextView
-//android:id="@+id/title"
-//android:layout_width="wrap_content"
-//android:layout_height="wrap_content"
-//android:layout_marginStart="16dp"
-//android:layout_marginTop="16dp"
-//android:text="Title"
-//app:layout_constraintStart_toStartOf="parent"
-//app:layout_constraintTop_toTopOf="parent" />
-//
-//
-//
-//<androidx.recyclerview.widget.RecyclerView
-//android:id="@+id/recycler_view"
-//android:layout_width="match_parent"
-//android:layout_height="wrap_content"
-//
-//android:layout_marginTop="16dp"
-//
-//app:layout_constraintEnd_toEndOf="parent"
-//app:layout_constraintStart_toStartOf="parent"
-//app:layout_constraintTop_toBottomOf="@+id/title" />
-//
-//<com.google.android.material.floatingactionbutton.FloatingActionButton
-//android:id="@+id/add_goal"
-//
-//
-//android:layout_width="wrap_content"
-//android:layout_height="wrap_content"
-//android:layout_gravity="bottom|end"
-//android:layout_marginEnd="16dp"
-//android:layout_marginBottom="16dp"
-//android:src="@drawable/add"
-//app:backgroundTint="@color/firstblue"
-//app:borderWidth="0dp"
-//app:tint="@color/white"
-//app:elevation="6dp"
-//app:rippleColor="@color/firstblue_light"/>
-//
-//</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 

@@ -8,7 +8,13 @@ data class Transactions(var categoryType: String? = null,
                         var title: String? = null,
                         var transactionType: String? = null,
                         var amount: Long? = null)
+{
+    enum class transactionImage {
+        Food, Shopping, Transport, Medical, Education, Other
 
+
+    }
+}
 
 
 

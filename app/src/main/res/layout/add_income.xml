@@ -110,7 +110,7 @@
                 app:iconSize="32dp"
                 android:textSize="10sp"
                 app:iconPadding="12dp"
-                android:text="@string/savings"
+                android:text="@string/gifts"
                 tools:ignore="SmallSp" />
 
 
